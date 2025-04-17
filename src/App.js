@@ -4,7 +4,7 @@ const TodoList = ({ list }) => (
     <div>
     {
         list.map((item) => {
-            return <div>{item}</div>;
+            return <ul><li>{item}</li></ul>;
         })
     }
     </div>
