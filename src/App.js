@@ -18,17 +18,21 @@ const App = () => {
 
     const onAdd = (value) => {
       if(squares[value] != null){
-        throw new Error("No")//這裡要改成alert
-      }
-      squares[value] = player;
-      setSquares(squares);
+        alert("這個格子已經被佔用了");
+        //這裡要改成alert
 
-
-      if(player ==='X'){
-        setList("O");
       }else{
-        setList("X")
+        squares[value] = player;
+        setSquares(squares);
+  
+  
+        if(player ==='X'){
+          setList("O");
+        }else{
+          setList("X")
+        }
       }
+
     }
 
 
