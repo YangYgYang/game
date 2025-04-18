@@ -19,7 +19,6 @@ const App = () => {
     const onAdd = (value) => {
       if(squares[value] != null){
         alert("這個格子已經被佔用了");
-        //這裡要改成alert
 
       }else{
         squares[value] = player;
