@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState,useEffect } from 'react';
 import './App.css';
 
 
@@ -12,23 +12,55 @@ const Title = ({ player }) => {
   return(<div class="status">Current player: {player}</div>)
 }
 
+const checkWin = (squares)=>{
+  const lines = [
+    [0, 1, 2],
+    [3, 4, 5],
+    [6, 7, 8],
+    [0, 3, 6],
+    [1, 4, 7],
+    [2, 5, 8],
+    [0, 4, 8],
+    [2, 4, 6]
+  ];
+
+  for (let i = 0; i < lines.length; i++) {
+    const [a, b, c] = lines[i];
+    if ( squares[a] === squares[b] && squares[a] === squares[c]) {
+      return squares[a];
+    }
+  }
+
+  return null
+}
+
 const App = () => {
     const [player, setList] = useState('X');
     const [squares, setSquares] = useState(Array(9).fill(null));
+
 
     const onAdd = (value) => {
       if(squares[value] != null){
         alert("這個格子已經被佔用了");
 
       }else{
+        
         squares[value] = player;
         setSquares(squares);
-  
-  
-        if(player ==='X'){
+        const result = checkWin(squares)//確認輸贏的function
+
+        if(player ==='X'&& result === null){
           setList("O");
-        }else{
+        }else if (player ==='O'&& result === null){
           setList("X")
+        }else if(result !== null){
+          setTimeout(()=>{
+            alert("玩家 "+result+" 獲勝");
+            setSquares(Array(9).fill(null));
+            setList('X');
+          },1
+
+          )
         }
       }
 
